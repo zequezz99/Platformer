@@ -21,7 +21,9 @@ public class Equipment : MonoBehaviour
 
     public void Unequip(Slot slot)
     {
-        if (items.TryGetValue(slot, out EquipmentItem item))
+        EquipmentItem item = null;
+
+        if (items.TryGetValue(slot, out item))
         {
             Inventory inv = GetComponent<Inventory>();
             if (inv)

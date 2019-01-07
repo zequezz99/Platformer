@@ -8,9 +8,7 @@ public class LevelSelector : MonoBehaviour
 
     private static LevelSelectNode lastNode;
 
-    private const float moveTime = 0.25f;
-
-    private float lastMoveTime;
+    private bool canMove = true;
     private LevelSelectNode currentNode;
 
     private void Activate()
@@ -20,55 +18,61 @@ public class LevelSelector : MonoBehaviour
 
     private void Awake()
     {
-        lastMoveTime = Time.fixedTime - moveTime;
-
         Move(lastNode ? lastNode : startNode);
     }
 
     private void Update()
     {
+        Vector2 input = new Vector2(Input.GetAxis("Horizontal"),
+                                    Input.GetAxis("Vertical"));
 
         if (Input.GetButtonDown("Submit"))
         {
             Activate();
         }
+        else if (canMove)
+        {
+            if (!input.Equals(Vector2.zero))
+            {
+                canMove = false;
 
+                if (Mathf.Abs(input.y) > Mathf.Abs(input.x))
+                {
+                    if (input.y > 0)
+                    {
+                        if (currentNode.north)
+                            Move(currentNode.north);
+                    }
+                    else
+                    {
+                        if (currentNode.south)
+                            Move(currentNode.south);
+                    }
+                }
+                else
+                {
+                    if (input.x > 0)
+                    {
+                        if (currentNode.east)
+                            Move(currentNode.east);
+                    }
+                    else
+                    {
+                        if (currentNode.west)
+                            Move(currentNode.west);
+                    }
+                }
+            }
+        }
         else
         {
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
-
-            if (horizontal > 0)
-            {
-                if (currentNode.east)
-                    Move(currentNode.east);
-            }
-            else if (horizontal < 0)
-            {
-                if (currentNode.west)
-                    Move(currentNode.west);
-            }
-            if (vertical > 0)
-            {
-                if (currentNode.north)
-                    Move(currentNode.north);
-            }
-            else if (vertical < 0)
-            {
-                if (currentNode.south)
-                    Move(currentNode.south);
-            }
+            canMove = input.Equals(Vector2.zero);
         }
     }
 
     private void Move(LevelSelectNode node)
     {
-        if (Time.fixedTime - lastMoveTime >= moveTime)
-        {
-            currentNode = lastNode = node;
-            transform.position = node.transform.position;
-
-            lastMoveTime = Time.fixedTime;
-        }
+        currentNode = lastNode = node;
+        transform.position = node.transform.position;
     }
 }
