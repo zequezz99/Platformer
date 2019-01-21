@@ -7,6 +7,7 @@ public class LevelSelector : MonoBehaviour
     public LevelSelectNode startNode;
 
     private static LevelSelectNode lastNode;
+
     private Direction lastDirection;
     private LevelSelectNode currentNode;
 
