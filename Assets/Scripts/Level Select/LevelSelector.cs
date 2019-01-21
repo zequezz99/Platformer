@@ -7,8 +7,6 @@ public class LevelSelector : MonoBehaviour
     public LevelSelectNode startNode;
 
     private static LevelSelectNode lastNode;
-
-    //private bool canMove = true;
     private Direction lastDirection;
     private LevelSelectNode currentNode;
 
@@ -23,58 +21,6 @@ public class LevelSelector : MonoBehaviour
     {
         Move(lastNode ? lastNode : startNode);
     }
-
-    /* Old Update Function */
-    /*
-    private void Update()
-    {
-        Vector2 input = new Vector2(Input.GetAxis("Horizontal"),
-                                    Input.GetAxis("Vertical"));
-
-        if (Input.GetButtonDown("Submit"))
-        {
-            Activate();
-        }
-        else if (canMove)
-        {
-            if (!input.Equals(Vector2.zero))
-            {
-                canMove = false;
-
-                if (Mathf.Abs(input.y) > Mathf.Abs(input.x))
-                {
-                    if (input.y > 0)
-                    {
-                        if (currentNode.north)
-                            Move(currentNode.north);
-                    }
-                    else
-                    {
-                        if (currentNode.south)
-                            Move(currentNode.south);
-                    }
-                }
-                else
-                {
-                    if (input.x > 0)
-                    {
-                        if (currentNode.east)
-                            Move(currentNode.east);
-                    }
-                    else
-                    {
-                        if (currentNode.west)
-                            Move(currentNode.west);
-                    }
-                }
-            }
-        }
-        else
-        {
-            canMove = input.Equals(Vector2.zero);
-        }
-    }
-    */
 
     private void Move(LevelSelectNode node)
     {
