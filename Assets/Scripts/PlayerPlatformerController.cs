@@ -38,13 +38,14 @@ public class PlayerPlatformerController : PhysicsObject
             }
         }
 
-        /*
-        bool flipSprite = (spriteRenderer.flipX ? (move.x > 0.01f) : (move.x < 0.01f));
-        if (flipSprite)
+        bool flipObject = (transform.localScale.x > 0 ? (move.x < 0.0f) : (move.x > 0.0f));
+        if (flipObject)
         {
-            spriteRenderer.flipX = !spriteRenderer.flipX;
+            transform.localScale = new Vector3(transform.localScale.x * -1,
+                                               transform.localScale.y,
+                                               transform.localScale.z);
         }
-
+        /*
         animator.SetBool("grounded", grounded);
         animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
         */

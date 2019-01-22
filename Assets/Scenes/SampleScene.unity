@@ -113,6 +113,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &71242121 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4130438619110660, guid: a4c94c710b13b4f8895436ca6021efb9,
+    type: 2}
+  m_PrefabInternal: {fileID: 457385432}
+--- !u!1001 &457385432
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1914306207}
+    m_Modifications:
+    - target: {fileID: 4130438619110660, guid: a4c94c710b13b4f8895436ca6021efb9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130438619110660, guid: a4c94c710b13b4f8895436ca6021efb9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130438619110660, guid: a4c94c710b13b4f8895436ca6021efb9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130438619110660, guid: a4c94c710b13b4f8895436ca6021efb9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130438619110660, guid: a4c94c710b13b4f8895436ca6021efb9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130438619110660, guid: a4c94c710b13b4f8895436ca6021efb9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130438619110660, guid: a4c94c710b13b4f8895436ca6021efb9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130438619110660, guid: a4c94c710b13b4f8895436ca6021efb9, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a4c94c710b13b4f8895436ca6021efb9, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +480,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 519420032}
+  - {fileID: 71242121}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -470,7 +518,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.56060606
+  m_Radius: 0.55
 --- !u!114 &1914306210
 MonoBehaviour:
   m_ObjectHideFlags: 0
