@@ -30,11 +30,16 @@ public class Abilities : MonoBehaviour
                 EquipmentItem item = e.GetItem(i);
                 if (item)
                 {
-                    Abilities abils = item.GetComponent<Abilities>();
-                    if (abils)
-                        eBonus += abils.GetScore(ability);
+                    eBonus += item.GetComponent<Abilities>().GetScore(ability);
                 }
             }
+        }
+
+        if (enabled.GetType() == typeof(WeaponEquipment))
+        {
+            WeaponItem weapon = ((WeaponEquipment)e).GetWeapon();
+            if (weapon)
+                eBonus += weapon.GetComponent<Abilities>().GetScore(ability);
         }
 
         return eBonus + scores[(int)ability];

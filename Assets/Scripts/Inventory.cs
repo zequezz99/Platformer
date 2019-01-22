@@ -16,13 +16,25 @@ public class Inventory : MonoBehaviour
 
     public int Add(InventoryItem item)
     {
-        if (autoEquip && item.GetComponent<EquipmentItem>())
+        if (autoEquip)
         {
-            Equipment equipment = GetComponent<Equipment>();
-            if (equipment && equipment.HasRoomFor((EquipmentItem)item))
+            if (item.GetComponent<EquipmentItem>())
             {
-                equipment.Equip((EquipmentItem)item);
-                return item.Count;
+                Equipment equipment = GetComponent<Equipment>();
+                if (equipment && equipment.HasRoomFor((EquipmentItem)item))
+                {
+                    equipment.Equip((EquipmentItem)item);
+                    return item.Count;
+                }
+            }
+            else if (item.GetComponent<WeaponItem>())
+            {
+                WeaponEquipment equipment = GetComponent<WeaponEquipment>();
+                if (equipment && equipment.HasRoomFor((WeaponItem)item))
+                {
+                    equipment.EquipWeapon((WeaponItem)item);
+                    return item.Count;
+                }
             }
         }
 

@@ -62,7 +62,6 @@ public class Equipment : MonoBehaviour
         if (equipment[index])
         {
             Inventory inv = GetComponent<Inventory>();
-
             if (!inv || inv.Add(equipment[index]) == 0)
                 InventoryPickup.DropItem(equipment[index], transform.position);
 
