@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minGroundNormalY: 0.65
-  gravityModifier: 1
+  gravityModifier: 1.5
   maxSpeed: 7
   jumpTakeOffSpeed: 7
 --- !u!4 &1914306207
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e9dde6471d30e4c854c3e47220d65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots: 0000000001000000010000000100000002000000
+  slots: 00000000010000000100000002000000
 --- !u!114 &1914306211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,6 +547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   capacity: 16
+  autoEquip: 0
 --- !u!114 &1914306212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,7 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6996861ec95bb6488b915158ced3eb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scores: 000000000000000000000000
+  scores: 00000000000000000000000000000000
 --- !u!212 &1914306213
 SpriteRenderer:
   m_ObjectHideFlags: 0

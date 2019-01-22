@@ -3,13 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Desc: Holds an int value for each Ability and calculates Ability bonuses,
+ *       accounting for equipment and weapon.
+ * 
+ * Add to: Any Actor with Ability scores or any equipable item to denote Ability
+ *         bonuses when equipped.
+ */
 public class Abilities : MonoBehaviour
 {
     public enum Ability
     {
         Strength = 0,
-        Dexterity = 1,
-        Luck = 2
+        Charm = 1,
+        Viatlity = 2,
+        Luck = 3
     };
 
     public int[] scores = new int[Enum.GetNames(typeof(Ability)).Length];
