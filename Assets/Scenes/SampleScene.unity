@@ -473,6 +473,7 @@ MonoBehaviour:
   gravityModifier: 1.5
   maxSpeed: 7
   jumpTakeOffSpeed: 7
+  attackTime: 0.75
 --- !u!4 &1914306207
 Transform:
   m_ObjectHideFlags: 0
