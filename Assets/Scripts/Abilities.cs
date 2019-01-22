@@ -25,9 +25,9 @@ public class Abilities : MonoBehaviour
         Equipment e = GetComponent<Equipment>();
         if (e)
         {
-            foreach (Equipment.Slot slot in Enum.GetValues(typeof(Equipment.Slot)))
+            for (int i = 0; i < e.slots.Length; i++)
             {
-                EquipmentItem item = e.GetItem(slot);
+                EquipmentItem item = e.GetItem(i);
                 if (item)
                 {
                     Abilities abils = item.GetComponent<Abilities>();

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public int capacity = 16;
+    public bool autoEquip;
 
     public int Count
     {
@@ -15,6 +16,16 @@ public class Inventory : MonoBehaviour
 
     public int Add(InventoryItem item)
     {
+        if (autoEquip && item.GetComponent<EquipmentItem>())
+        {
+            Equipment equipment = GetComponent<Equipment>();
+            if (equipment && equipment.HasRoomFor((EquipmentItem)item))
+            {
+                equipment.Equip((EquipmentItem)item);
+                return item.Count;
+            }
+        }
+
         int count = item.Count;
 
         for (int i = 0; i < items.Count; i++)

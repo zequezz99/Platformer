@@ -4,42 +4,75 @@ using UnityEngine;
 
 public class Equipment : MonoBehaviour
 {
-    public enum Slot { Head, Torso, Legs, Hands, Feet }
+    public enum Slot { Necklace, Ring, Feet }
 
-    private Dictionary<Slot, EquipmentItem> items;
+    public Slot[] slots;
 
-    public void Equip(EquipmentItem item)
+    private EquipmentItem[] equipment;
+
+    public bool Equip(EquipmentItem item)
     {
-        Unequip(item.slot);
-        items.Add(item.slot, item);
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (item.slot == slots[i] && !equipment[i])
+            {
+                return Equip(i, item);
+            }
+        }
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (item.slot == slots[i])
+            {
+                return Equip(i, item);
+            }
+        }
+
+        return false;
     }
 
-    public EquipmentItem GetItem(Slot slot)
+    public bool Equip(int index, EquipmentItem item)
     {
-        return items[slot];
+        if (slots[index] != item.slot)
+            return false;
+
+        Unequip(index);
+        equipment[index] = item;
+
+        return true;
     }
 
-    public void Unequip(Slot slot)
+    public EquipmentItem GetItem(int index)
     {
-        EquipmentItem item = null;
+        return equipment[index];
+    }
 
-        if (items.TryGetValue(slot, out item))
+    public bool HasRoomFor(EquipmentItem item)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i] == item.slot && !equipment[i])
+                return true;
+        }
+        return false;
+    }
+
+    public bool Unequip(int index)
+    {
+        if (equipment[index])
         {
             Inventory inv = GetComponent<Inventory>();
-            if (inv)
-            {
-                item.Count -= inv.Add(item);
-            }
-            if (item.Count > 0)
-            {
-                InventoryPickup.DropItem(item, transform.position);
-            }
-            items.Add(slot, null);
+
+            if (!inv || inv.Add(equipment[index]) == 0)
+                InventoryPickup.DropItem(equipment[index], transform.position);
+
+            return true;
         }
+        return false;
     }
 
     private void Awake()
     {
-        items = new Dictionary<Slot, EquipmentItem>();
+        equipment = new EquipmentItem[slots.Length];
     }
 }
