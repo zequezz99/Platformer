@@ -157,8 +157,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1769897983888366, guid: a4c94c710b13b4f8895436ca6021efb9, type: 2}
-      propertyPath: m_IsActive
+    - target: {fileID: 61085010326948050, guid: a4c94c710b13b4f8895436ca6021efb9,
+        type: 2}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

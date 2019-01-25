@@ -9,8 +9,10 @@ public class PhysicsObject : MonoBehaviour
 
     public float minGroundNormalY = 1f;
     public float gravityModifier = 1.5f;
+    public float knockbackScalar = 1f;
 
     protected Vector2 targetVelocity;
+    protected List<Vector2> addedVelocities = new List<Vector2>();
     protected bool grounded;
     protected Vector2 groundNormal;
     protected Rigidbody2D rb2d;
@@ -22,6 +24,14 @@ public class PhysicsObject : MonoBehaviour
 
     private const float minMoveDistance = 0.001f;
     private const float shellRadius = 0.01f;
+    private const float addedVelocityDecay = 4f;
+    private const float groundedKnockbackThreshold = 3f;
+
+    public void AddVelocity(Vector2 velocity)
+    {
+        this.velocity.y += velocity.y;
+        addedVelocities.Add(new Vector2(velocity.x, 0));
+    }
 
     void OnEnable()
     {
@@ -33,17 +43,38 @@ public class PhysicsObject : MonoBehaviour
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         contactFilter.useLayerMask = true;
+
+        groundNormal = Vector2.up;
     }
 
     protected virtual void Update()
     {
         targetVelocity = Vector2.zero;
         ComputeVelocity();
+        ComputeAddedVelocity();
     }
 
     protected virtual void ComputeVelocity()
     {
 
+    }
+
+    private void ComputeAddedVelocity()
+    {
+        List<Vector2> newAddedVelocities = new List<Vector2>();
+        for (int i = 0; i < addedVelocities.Count; i++)
+        {
+            targetVelocity += addedVelocities[i];
+
+            bool positive = addedVelocities[i].x > 0;
+            addedVelocities[i] = new Vector2(addedVelocities[i].x - addedVelocityDecay * Time.deltaTime, 0);
+            if ((positive ? addedVelocities[i].x > 0 : addedVelocities[i].x < 0)
+                && (!grounded || addedVelocities[i].magnitude >= groundedKnockbackThreshold))
+            {
+                newAddedVelocities.Add(addedVelocities[i]);
+            }
+        }
+        addedVelocities = newAddedVelocities;
     }
 
     void FixedUpdate()
