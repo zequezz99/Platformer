@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class XFollowPlayer : NPCPlatformerController
+public class MoveTowards : NPCPlatformerController
 {
     public float minFollowDistance = 0.5f;
     public float maxFollowDistance = 2f;
