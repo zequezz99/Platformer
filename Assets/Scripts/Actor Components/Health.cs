@@ -16,13 +16,13 @@ public class Health : MonoBehaviour
         if (health == 0)
         {
             Die();
-            return;
+            //return;
         }
 
         PhysicsObject physObj = GetComponent<PhysicsObject>();
         if (physObj)
         {
-            Vector2 knockback = (hitPos - (Vector2)transform.position).normalized;
+            Vector2 knockback = ((Vector2)transform.position - hitPos).normalized;
             knockback *= damage * physObj.knockbackScalar;
             physObj.AddVelocity(knockback);
         }
@@ -45,6 +45,14 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-
+        PlayerPlatformerController player = GetComponent<PlayerPlatformerController>();
+        if (player)
+        {
+            player.Die();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

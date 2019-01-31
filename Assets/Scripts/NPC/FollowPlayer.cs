@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveTowards : NPCPlatformerController
+public class FollowPlayer : NPCPlatformerController
 {
-    public float minFollowDistance = 0.5f;
+    public float minFollowDistance = 1f;
     public float maxFollowDistance = 2f;
 
     private float targetX;
@@ -16,7 +16,7 @@ public class MoveTowards : NPCPlatformerController
         float x = transform.position.x;
         float playerX = FindObjectOfType<PlayerPlatformerController>().transform.position.x;
 
-        if ((Mathf.Abs(targetX - playerX) > maxFollowDistance) /*&& (Mathf.Abs(targetX - x) <= xThreshold)*/)
+        if ((Mathf.Abs(targetX - playerX) > maxFollowDistance) && (Mathf.Abs(targetX - x) <= xThreshold))
         {
             if (playerX > x)
                 targetX = playerX - Random.Range(minFollowDistance, maxFollowDistance);

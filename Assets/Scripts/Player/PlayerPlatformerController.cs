@@ -14,6 +14,11 @@ public class PlayerPlatformerController : PhysicsObject
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
+    public void Die()
+    {
+
+    }
+
     protected override void ComputeVelocity()
     {
         Vector2 move = Vector2.zero;
