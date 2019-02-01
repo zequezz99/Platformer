@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerPlatformerController : PhysicsObject
 {
     public float maxSpeed = 7;
-    public float jumpTakeOffSpeed = 7;
+    public float jumpTakeOffSpeed = 10;
     public float attackTime = 0.75f;
 
     private bool attackBoxActive;
@@ -13,6 +13,8 @@ public class PlayerPlatformerController : PhysicsObject
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+
+    private const float attackBoxActiveTime = 0.5f;
 
     public void Die()
     {
@@ -68,7 +70,7 @@ public class PlayerPlatformerController : PhysicsObject
     {
         base.Update();
 
-        if (attackBoxActive)
+        if (attackBoxActive && Time.fixedTime - lastAttackTime > attackBoxActiveTime)
         {
             GetComponentInChildren(typeof(AttackBox), true).gameObject.SetActive(false);
             attackBoxActive = false;

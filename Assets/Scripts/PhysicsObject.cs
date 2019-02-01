@@ -8,12 +8,12 @@ public class PhysicsObject : MonoBehaviour
 {
 
     public float minGroundNormalY = 1f;
-    public float gravityModifier = 1.5f;
-    //public float knockbackScalar = 1f;
+    public float gravityModifier = 2f;
 
     protected Vector2 targetVelocity;
     protected Vector2 addedVelocity;
     protected bool grounded;
+    protected bool canMove = true;
     protected Vector2 groundNormal;
     protected Rigidbody2D rb2d;
     protected Vector2 velocity;
@@ -21,28 +21,26 @@ public class PhysicsObject : MonoBehaviour
 
     private RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
     private List<RaycastHit2D> hitBufferList = new List<RaycastHit2D>(16);
+    private float lastKnockback;
 
     private const float minMoveDistance = 0.001f;
     private const float shellRadius = 0.01f;
-    private const float hitVelocity = 8f;
-    private const float minAddedVelocity = 2f;
-    private const float addedVelocityDecay = 5f;
-
-    /*
-    public void AddVelocity(Vector2 velocity)
-    {
-        this.velocity.y += velocity.y;
-        addedVelocities.Add(new Vector2(velocity.x, 0));
-    }
-    */
+    private const float hitVelocityX = 6f;
+    private const float hitVelocityY = 6f;
+    private const float minAddedVelocity = 4f;
+    private const float addedVelocityDecay = 7f;
+    private const float knockbackTime = 0.5f;
 
     public void KnockBack(Vector2 direction)
     {
         direction = new Vector2(direction.x, 0).normalized;
 
-        velocity.y = hitVelocity;
+        velocity.y = 0; //hitVelocityY;
 
-        addedVelocity.x = direction.x * hitVelocity;
+        addedVelocity.x = direction.x * hitVelocityX;
+
+        canMove = false;
+        lastKnockback = Time.fixedTime;
     }
 
     void OnEnable()
@@ -62,8 +60,13 @@ public class PhysicsObject : MonoBehaviour
     protected virtual void Update()
     {
         targetVelocity = Vector2.zero;
-        velocity.x = 0;
-        ComputeVelocity();
+
+        if (Time.fixedTime - lastKnockback >= knockbackTime)
+            canMove = true;
+
+        if (canMove)
+            ComputeVelocity();
+
         ComputeAddedVelocity();
     }
 
@@ -100,7 +103,7 @@ public class PhysicsObject : MonoBehaviour
             addedVelocity.y += decay;
         }
 
-        velocity += addedVelocity;
+        velocity.x = addedVelocity.x;
     }
 
 
