@@ -9,10 +9,10 @@ public class PhysicsObject : MonoBehaviour
 
     public float minGroundNormalY = 1f;
     public float gravityModifier = 1.5f;
-    public float knockbackScalar = 1f;
+    //public float knockbackScalar = 1f;
 
     protected Vector2 targetVelocity;
-    protected List<Vector2> addedVelocities = new List<Vector2>();
+    protected Vector2 addedVelocity;
     protected bool grounded;
     protected Vector2 groundNormal;
     protected Rigidbody2D rb2d;
@@ -24,13 +24,25 @@ public class PhysicsObject : MonoBehaviour
 
     private const float minMoveDistance = 0.001f;
     private const float shellRadius = 0.01f;
-    private const float addedVelocityDecay = 4f;
-    private const float groundedKnockbackThreshold = 3f;
+    private const float hitVelocity = 8f;
+    private const float minAddedVelocity = 2f;
+    private const float addedVelocityDecay = 5f;
 
+    /*
     public void AddVelocity(Vector2 velocity)
     {
         this.velocity.y += velocity.y;
         addedVelocities.Add(new Vector2(velocity.x, 0));
+    }
+    */
+
+    public void KnockBack(Vector2 direction)
+    {
+        direction = new Vector2(direction.x, 0).normalized;
+
+        velocity.y = hitVelocity;
+
+        addedVelocity.x = direction.x * hitVelocity;
     }
 
     void OnEnable()
@@ -50,6 +62,7 @@ public class PhysicsObject : MonoBehaviour
     protected virtual void Update()
     {
         targetVelocity = Vector2.zero;
+        velocity.x = 0;
         ComputeVelocity();
         ComputeAddedVelocity();
     }
@@ -61,26 +74,40 @@ public class PhysicsObject : MonoBehaviour
 
     private void ComputeAddedVelocity()
     {
-        List<Vector2> newAddedVelocities = new List<Vector2>();
-        for (int i = 0; i < addedVelocities.Count; i++)
-        {
-            targetVelocity += addedVelocities[i];
+        if (Mathf.Abs(addedVelocity.x) < minAddedVelocity)
+            addedVelocity.x = 0;
 
-            bool positive = addedVelocities[i].x > 0;
-            addedVelocities[i] = new Vector2(addedVelocities[i].x - addedVelocityDecay * Time.deltaTime, 0);
-            if ((positive ? addedVelocities[i].x > 0 : addedVelocities[i].x < 0)
-                && (!grounded || addedVelocities[i].magnitude >= groundedKnockbackThreshold))
-            {
-                newAddedVelocities.Add(addedVelocities[i]);
-            }
+        if (Mathf.Abs(addedVelocity.y) < minAddedVelocity)
+            addedVelocity.y = 0;
+
+        float decay = addedVelocityDecay * Time.deltaTime;
+
+        if (Mathf.Abs(addedVelocity.x) > 0)
+        {
+            if (addedVelocity.x > 0)
+                decay = Mathf.Min(-decay, decay);
+            else
+                decay = Mathf.Max(-decay, decay);
+            addedVelocity.x += decay;
         }
-        addedVelocities = newAddedVelocities;
+
+        if (Mathf.Abs(addedVelocity.y) > 0)
+        {
+            if (addedVelocity.y > 0)
+                decay = Mathf.Min(-decay, decay);
+            else
+                decay = Mathf.Max(-decay, decay);
+            addedVelocity.y += decay;
+        }
+
+        velocity += addedVelocity;
     }
+
 
     void FixedUpdate()
     {
         velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
-        velocity.x = targetVelocity.x;
+        velocity.x += targetVelocity.x;
 
         grounded = false;
 

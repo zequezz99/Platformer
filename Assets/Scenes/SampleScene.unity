@@ -954,7 +954,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minGroundNormalY: 1
   gravityModifier: 1.5
-  knockbackScalar: 1
   maxSpeed: 5
   minFollowDistance: 1
   maxFollowDistance: 2
@@ -1170,7 +1169,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minGroundNormalY: 0.65
   gravityModifier: 1.5
-  knockbackScalar: 1
   maxSpeed: 7
   jumpTakeOffSpeed: 7
   attackTime: 0.75

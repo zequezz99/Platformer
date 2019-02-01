@@ -22,9 +22,7 @@ public class Health : MonoBehaviour
         PhysicsObject physObj = GetComponent<PhysicsObject>();
         if (physObj)
         {
-            Vector2 knockback = ((Vector2)transform.position - hitPos).normalized;
-            knockback *= damage * physObj.knockbackScalar;
-            physObj.AddVelocity(knockback);
+            physObj.KnockBack((Vector2)transform.position - hitPos);
         }
     }
 
