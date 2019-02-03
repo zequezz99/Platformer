@@ -18,7 +18,7 @@ public class PlayerPlatformerController : PhysicsObject
 
     public void Die()
     {
-
+        // TODO implement death
     }
 
     protected override void ComputeVelocity()
@@ -52,34 +52,11 @@ public class PlayerPlatformerController : PhysicsObject
         targetVelocity = move * maxSpeed;
     }
 
-    private void Attack()
-    {
-        GetComponentInChildren(typeof(AttackBox), true).gameObject.SetActive(true);
-        attackBoxActive = true;
-    }
-
     private void Awake()
     {
         lastAttackTime = Time.fixedTime - attackTime;
 
         //spriteRenderer = GetComponent<SpriteRenderer>();
         //animator = GetComponent<Animator>();
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-
-        if (attackBoxActive && Time.fixedTime - lastAttackTime > attackBoxActiveTime)
-        {
-            GetComponentInChildren(typeof(AttackBox), true).gameObject.SetActive(false);
-            attackBoxActive = false;
-        }
-
-        if (Input.GetButtonDown("Fire1") && Time.fixedTime - lastAttackTime >= attackTime)
-        {
-            lastAttackTime = Time.fixedTime;
-            Attack();
-        }
     }
 }

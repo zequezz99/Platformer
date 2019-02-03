@@ -9,20 +9,23 @@ public class Health : MonoBehaviour
 
     private int health;
 
-    public virtual void Damage(int damage, Vector2 hitPos, GameObject damageSource = null)
+    public virtual void Damage(int damage, GameObject damageSource = null)
     {
+        if (damageSource && damageSource.Equals(gameObject))
+            return;
+
         health -= Mathf.Min(damage, health);
 
         if (health == 0)
         {
             Die();
-            //return;
+            return;
         }
 
         PhysicsObject physObj = GetComponent<PhysicsObject>();
-        if (physObj)
-        {
-            physObj.KnockBack((Vector2)transform.position - hitPos);
+        if (physObj && damageSource)
+        { 
+            physObj.KnockBack(transform.position - damageSource.transform.position);
         }
     }
 

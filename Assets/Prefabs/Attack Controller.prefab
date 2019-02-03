@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4130438619110660}
-  - component: {fileID: 114367103490794078}
+  - component: {fileID: 1208936051488519735}
   - component: {fileID: 61085010326948050}
   - component: {fileID: 50402615152366626}
   m_Layer: 10
-  m_Name: Attack Box
+  m_Name: Attack Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114367103490794078
+--- !u!114 &1208936051488519735
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,10 +42,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1769897983888366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0390f92850f9a427f9d4c4f224b56c67, type: 3}
+  m_Script: {fileID: 11500000, guid: 2958f2f3f84df4d64b9b0b4667b7dbf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
 --- !u!61 &61085010326948050
 BoxCollider2D:
   m_ObjectHideFlags: 0

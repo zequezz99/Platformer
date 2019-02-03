@@ -26,7 +26,6 @@ public class PhysicsObject : MonoBehaviour
     private const float minMoveDistance = 0.001f;
     private const float shellRadius = 0.01f;
     private const float hitVelocityX = 6f;
-    private const float hitVelocityY = 6f;
     private const float minAddedVelocity = 4f;
     private const float addedVelocityDecay = 7f;
     private const float knockbackTime = 0.5f;
@@ -35,7 +34,7 @@ public class PhysicsObject : MonoBehaviour
     {
         direction = new Vector2(direction.x, 0).normalized;
 
-        velocity.y = 0; //hitVelocityY;
+        velocity.y = 0;
 
         addedVelocity.x = direction.x * hitVelocityX;
 
@@ -61,7 +60,7 @@ public class PhysicsObject : MonoBehaviour
     {
         targetVelocity = Vector2.zero;
 
-        if (Time.fixedTime - lastKnockback >= knockbackTime)
+        if (!canMove && Time.fixedTime - lastKnockback >= knockbackTime)
             canMove = true;
 
         if (canMove)

@@ -6,4 +6,6 @@ using UnityEngine;
 public class WeaponItem : InventoryItem {
 
     public int damage = 1;
+    public float attackRate = 0.75f;
+    public float attackDuration = 0.25f;
 }

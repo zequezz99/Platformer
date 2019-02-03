@@ -11,7 +11,7 @@ public class PlayerDamageArea : MonoBehaviour
     {
         if (other.name.Equals("Player"))
         {
-            other.GetComponent<Health>().Damage(damage, transform.parent.position, transform.parent.gameObject);
+            other.GetComponent<Health>().Damage(damage, transform.parent.gameObject);
         }
     }
 }
