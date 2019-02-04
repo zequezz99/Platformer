@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Test
   maxCount: 1
+  sprite: {fileID: 21300000, guid: 6dceb679b136010499c9a426ea2ab216, type: 3}

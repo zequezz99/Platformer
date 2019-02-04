@@ -53,6 +53,10 @@ public class Health : MonoBehaviour
         }
         else
         {
+            DropTable dropTable = GetComponent<DropTable>();
+            if (dropTable)
+                dropTable.Drop();
+
             Destroy(gameObject);
         }
     }

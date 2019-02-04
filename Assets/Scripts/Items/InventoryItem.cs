@@ -6,6 +6,7 @@ public class InventoryItem : MonoBehaviour
 {
     public string itemName;
     public int maxCount = 1;
+    public Sprite sprite;
 
     public int Count
     {
