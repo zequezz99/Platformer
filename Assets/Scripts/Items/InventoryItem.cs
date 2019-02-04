@@ -8,11 +8,7 @@ public class InventoryItem : MonoBehaviour
     public int maxCount = 1;
     public Sprite sprite;
 
-    public int Count
-    {
-        get;
-        set;
-    }
+    public int Count { get; set; }
 
     public bool Equals(InventoryItem other)
     {
