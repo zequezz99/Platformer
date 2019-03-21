@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
         get { return items.Count; }
     }
 
-    private List<InventoryItem> items;
+    private List<InventoryItem> items = new List<InventoryItem>();
 
     public int Add(InventoryItem item)
     {

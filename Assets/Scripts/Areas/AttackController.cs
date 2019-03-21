@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class AttackController : MonoBehaviour {
 
+    public WeaponItem defaultWeapon;
+
     private bool active;
     private bool canAttack;
     private float lastActive;
@@ -39,7 +41,7 @@ public class AttackController : MonoBehaviour {
 
     private void GetWeapon()
     {
-        weapon = new WeaponItem();
+        weapon = defaultWeapon;
 
         WeaponEquipment equipment = GetComponentInParent<WeaponEquipment>();
         if (equipment)
@@ -90,7 +92,9 @@ public class AttackController : MonoBehaviour {
             active = false;
         }
 
-        if (Input.GetButtonDown("Fire1") && canAttack)
+        if (!PauseController.IsPaused()
+            && Input.GetButtonDown("Fire1")
+            && canAttack)
         {
             Attack();
         }

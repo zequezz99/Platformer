@@ -8,20 +8,22 @@ public class InventoryPickup : Pickup
 {
     public InventoryItem inventoryItem;
 
+    public static InventoryItem item;
+
     private static float itemRadius = 0.5f;
 
     public static void DropItem(InventoryItem item, Vector2 pos)
     {
-        InventoryPickup pickup = Instantiate(FindObjectOfType<DefaultPrefabs>().inventoryPickup,
-                                             pos, Quaternion.identity);
+        GameObject pickup = new GameObject(item.name + " Pickup");
+
+        pickup.transform.position = pos;
+
+        pickup.AddComponent<InventoryPickup>().inventoryItem = item;
 
         pickup.GetComponent<CircleCollider2D>().radius = itemRadius;
-
-        pickup.GetComponent<InventoryPickup>().inventoryItem = item;
+        pickup.GetComponent<CircleCollider2D>().isTrigger = true;
 
         pickup.GetComponent<SpriteRenderer>().sprite = item.sprite;
-
-        pickup.name = item.name + " Pickup";
     }
 
     protected override void PickUp(Collider2D actor)
